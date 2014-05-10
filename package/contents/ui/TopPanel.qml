@@ -10,7 +10,11 @@ PlasmaCore.FrameSvgItem {
     property string altitude
     property alias temp: tempText.text
 
+    property string lastTemp: "°F"
+
     property int minimumWidth: 700
+
+    onTempChanged: lastTemp = temp
 
     imagePath: "widgets/frame"
     prefix: "plain"

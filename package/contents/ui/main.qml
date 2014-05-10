@@ -30,9 +30,20 @@ Item {
       height: 48
       clip: true
 
-      location: weatherData.status == XmlListModel.Ready ? weatherData.get(0).location : "Loading..."
-      altitude: weatherData.status == XmlListModel.Ready ? weatherData.get(0).altitude : ""
-      temp: weatherData.status == XmlListModel.Ready ? weatherData.get(0).tempF + "°F" : ""
+
+      temp: {
+          if (weatherData.status == XmlListModel.Ready)
+          {
+              if (root.metric)
+                  return weatherData.get(0).tempC + "°C";
+              else
+                  return weatherData.get(0).tempF + "°F";
+          }
+          else
+          {
+              return lastTemp;
+          }
+      }
 
         anchors {
             top: parent.top
@@ -83,7 +94,7 @@ Item {
             margins: 5
         }
 
-        text: weatherData.status == XmlListModel.Ready ? weatherData.get(0).time : ""
+        text: weatherData.status == XmlListModel.Ready ? weatherData.get(0).time : "Refreshing..."
         color: theme.textColor
     }
 
@@ -109,6 +120,14 @@ Item {
         id: weatherData
         query: "/current_observation"
         source: "http://api.wunderground.com/weatherstation/WXCurrentObXML.asp?ID="+info.stationId
+
+        onStatusChanged: {
+            if (status == XmlListModel.Ready)
+            {
+                info.location = get(0).location
+                info.altitude = get(0).altitude
+            }
+        }
 
         //BASIC INFO ----------------
         XmlRole { name: "location"; query: "location/full/string()" }
