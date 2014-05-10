@@ -15,6 +15,10 @@ PlasmaCore.FrameSvgItem {
     imagePath: "widgets/frame"
     prefix: "plain"
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     Image {
         id: conditionsIcon
 
@@ -43,7 +47,7 @@ PlasmaCore.FrameSvgItem {
         }
 
         font.pixelSize: height
-        color: "#ffffff"
+        color: theme.textColor
     }
 
     Text {
@@ -58,7 +62,7 @@ PlasmaCore.FrameSvgItem {
 
         text: parent.stationId+", "+parent.altitude
         font.pixelSize: height
-        color: "#ffffff"
+        color: theme.textColor
     }
 
     Text {
@@ -73,6 +77,6 @@ PlasmaCore.FrameSvgItem {
 
         verticalAlignment: Text.AlignVCenter
         font.pixelSize: height
-        color: "#ffffff"
+        color: theme.textColor
     }
 }

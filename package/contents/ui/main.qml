@@ -8,14 +8,16 @@ Item {
     property int minimumHeight: 400
     property int minimumWidth: 600
     property alias stationId: info.stationId
+    property bool metric: false
 
     Component.onCompleted: {
         plasmoid.addEventListener('ConfigChanged', function() {
             stationId = plasmoid.readConfig("stationID");
+            metric = plasmoid.readConfig("useMetric");
         });
     }
 
-    height: 500
+    height: 600
     width: 700
 
     PlasmaCore.Theme{
@@ -25,7 +27,7 @@ Item {
     TopPanel {
       id: info
 
-      height: parent.height/8
+      height: 48
       clip: true
 
       location: weatherData.status == XmlListModel.Ready ? weatherData.get(0).location : "Loading..."
@@ -39,6 +41,23 @@ Item {
             margins: 10
         }
 
+    }
+
+    WindViewer {
+        id: wind
+
+        anchors {
+            top: info.bottom
+            bottom: refresh.top
+            horizontalCenter: parent.horizontalCenter
+        }
+
+        isMetric: parent.metric
+
+        direction: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windDir : lastDir
+        degrees: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windDeg : lastDeg
+        speed: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windSpeed : lastSpeed
+        gust: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windGust : lastGust
     }
 
     PlasmaComponents.ToolButton {
@@ -55,34 +74,6 @@ Item {
         onClicked: weatherData.reload()
     }
 
-    Image {
-        id: windImage
-
-        anchors.centerIn: parent
-
-        height: parent.height/3
-        width: height
-        fillMode: Image.Stretch
-
-        source: "images/wind-white.png"
-        rotation: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windDeg : 0
-
-        Behavior on rotation {
-            PropertyAnimation {}
-        }
-    }
-
-    Text {
-        id: windDir
-
-        anchors.centerIn: windImage
-
-        text: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windDir : "North"
-        color: "#ffffff"
-
-        font.pixelSize: windImage.height/6
-    }
-
     Text {
         id: updatedText
 
@@ -93,7 +84,7 @@ Item {
         }
 
         text: weatherData.status == XmlListModel.Ready ? weatherData.get(0).time : ""
-        color: "#ffffff"
+        color: theme.textColor
     }
 
     Text {
@@ -107,7 +98,7 @@ Item {
 
         text: "<a href='http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId+"'>Weather data from Weather Underground</a>"
 
-        color: "#ffffff"
+        color: theme.textColor
 
         onLinkActivated: {
             Qt.openUrlExternally("http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId);
