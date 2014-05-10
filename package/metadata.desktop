@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=Desktop Weather Station
+Comment=Read weather data from weather stations registered with Weather Underground
+Icon=weather-clouds
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-DefaultSize=200,100
+
+X-KDE-PluginInfo-Author=Paul Bonnen
+X-KDE-PluginInfo-Email=hal7df@gmail.com
+X-KDE-PluginInfo-Website=http://pbonnenpersonalproject.weebly.com
+X-KDE-PluginInfo-Category=Examples
+X-KDE-PluginInfo-Name=org.monarq.desktop.weather
+X-KDE-PluginInfo-Version=0.1
+
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-ServiceTypes=Plasma/Applet
+Type=Service
