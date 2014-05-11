@@ -21,5 +21,5 @@ Download the latest .plasmoid package. Open up the folder in a terminal, and typ
 Download the tar.gz file and navigate into that folder. Then run the following steps:
 
   * `cmake .`
-  * `make && make install`
+  * `make && sudo make install`
 
