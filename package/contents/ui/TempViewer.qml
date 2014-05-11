@@ -4,16 +4,16 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Item {
     id: temp
 
-    property int tempF
-    property int tempC
-    property int dewF
-    property int dewC
-    property bool metric
+    property real tempF
+    property real tempC
+    property real dewF
+    property real dewC
+    property bool metric: parent.metric
 
-    property int lastTempF: 0
-    property int lastTempC: 0
-    property int lastDewF: 0
-    property int lastDewC: 0
+    property real lastTempF: 0
+    property real lastTempC: 0
+    property real lastDewF: 0
+    property real lastDewC: 0
 
     onTempFChanged: lastTempF = tempF
     onTempCChanged: lastTempC = tempC
@@ -37,6 +37,8 @@ Item {
         }
 
         width: parent.width/3
+
+        clip: true
 
         color: "#00000000"
         border.color: theme.textColor

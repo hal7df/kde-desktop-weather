@@ -67,8 +67,6 @@ Item {
             horizontalCenter: parent.horizontalCenter
         }
 
-        isMetric: parent.metric
-
         direction: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windDir : lastDir
         degrees: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windDeg : lastDeg
         speed: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windSpeed : lastSpeed
@@ -89,8 +87,23 @@ Item {
         tempF: weatherData.status == XmlListModel.Ready ? weatherData.get(0).tempF : lastTempF
         dewC: weatherData.status == XmlListModel.Ready ? weatherData.get(0).dewC : lastDewC
         dewF: weatherData.status == XmlListModel.Ready ? weatherData.get(0).dewF : lastDewF
-        metric: parent.metric
 
+    }
+
+    PrecipViewer {
+        id: precipitation
+
+        anchors {
+            top: info.bottom
+            bottom: refresh.top
+            left: wind.right
+            right: parent.right
+        }
+
+        hrIn: weatherData.status == XmlListModel.Ready ? weatherData.get(0).rainHrIn : lastHrIn
+        hrMm: weatherData.status == XmlListModel.Ready ? weatherData.get(0).rainHrMm : lastHrMm
+        dayIn: weatherData.status == XmlListModel.Ready ? weatherData.get(0).rainDayIn : lastDayIn
+        dayCm: weatherData.status == XmlListModel.Ready ? weatherData.get(0).rainDayCm : lastDayCm
     }
 
     PlasmaComponents.ToolButton {

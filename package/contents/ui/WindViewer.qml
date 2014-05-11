@@ -6,14 +6,14 @@ Item {
 
     property alias degrees: windImage.rotation
     property string direction
-    property int speed
-    property int gust
-    property bool isMetric
+    property real speed
+    property real gust
+    property bool metric: parent.metric
 
     property string lastDir: "North"
     property int lastDeg: 0
-    property int lastSpeed: 0
-    property int lastGust: 0
+    property real lastSpeed: 0
+    property real lastGust: 0
 
     onDirectionChanged: lastDir = direction
     onDegreesChanged: lastDeg = degrees
@@ -133,7 +133,7 @@ Item {
         Text {
             id: speedReadout
 
-            text: wind.isMetric ? "Speed: "+wind.convertMetric(wind.speed)+" km/h" : "Speed: "+wind.speed+" mph"
+            text: wind.metric ? "Speed: "+wind.convertMetric(wind.speed)+" km/h" : "Speed: "+wind.speed+" mph"
             color: theme.textColor
 
             anchors { left: speedGauge.right; leftMargin: 5 }
@@ -147,13 +147,13 @@ Item {
         Text {
             id: gustReadout
 
-            text: wind.isMetric && wind.gust < 20 ? "Gust: "+wind.convertMetric(wind.gust)+" km/h" : "Gust: "+wind.gust+" mph"
+            text: wind.metric && wind.gust < 20 ? "Gust: "+wind.convertMetric(wind.gust)+" km/h" : "Gust: "+wind.gust+" mph"
             color: theme.textColor
 
             anchors { left: speedGauge.right; leftMargin: 5 }
             y: wind.gust < 20 ? (parent.height-((wind.gust/20)*parent.height))-(paintedHeight/2) : 0
 
-            opacity: Math.abs(wind.gust-wind.speed) > 1 ? 1 : 0
+            opacity: Math.abs(speedReadout.y-y) > paintedHeight ? 1 : 0
             visible: opacity == 1
 
             Behavior on y {
