@@ -126,7 +126,6 @@ Item {
             id: speedReadout
 
             text: wind.isMetric ? "Speed: "+wind.convertMetric(wind.speed)+" km/h" : "Speed: "+wind.speed+" mph"
-            font.pointSize: 10
             color: theme.textColor
 
             anchors { left: speedGauge.right; leftMargin: 5 }
@@ -141,7 +140,6 @@ Item {
             id: gustReadout
 
             text: wind.isMetric && wind.gust < 20 ? "Gust: "+wind.convertMetric(wind.gust)+" km/h" : "Gust: "+wind.gust+" mph"
-            font.pointSize: 10
             color: theme.textColor
 
             anchors { left: speedGauge.right; leftMargin: 5 }
