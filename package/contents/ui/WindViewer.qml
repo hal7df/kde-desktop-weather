@@ -145,6 +145,9 @@ Item {
             anchors { left: speedGauge.right; leftMargin: 5 }
             y: wind.gust < 20 ? (parent.height-((wind.gust/20)*parent.height))-(paintedHeight/2) : 0
 
+            opacity: Math.abs(wind.gust-wind.speed) > 1 ? 1 : 0
+            visible: opacity == 1
+
             Behavior on y {
                 PropertyAnimation {}
             }

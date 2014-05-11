@@ -14,6 +14,9 @@
     <entry name="stationID" type="String">
       <default>KMIMILFO4</default>
     </entry>
+    <entry name="refreshInterval" type="Int">
+      <default>5</default>
+    </entry>
   </group>
 
 </kcfg>

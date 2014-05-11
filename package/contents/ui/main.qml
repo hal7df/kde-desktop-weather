@@ -9,11 +9,13 @@ Item {
     property int minimumWidth: 540
     property alias stationId: info.stationId
     property bool metric: false
+    property int refreshInterval: 300000
 
     Component.onCompleted: {
         plasmoid.addEventListener('ConfigChanged', function() {
             stationId = plasmoid.readConfig("stationID");
             metric = plasmoid.readConfig("useMetric");
+            refreshInvertal = plasmoid.readConfig("refreshInterval")*60000;
         });
     }
 
@@ -113,6 +115,17 @@ Item {
 
         onLinkActivated: {
             Qt.openUrlExternally("http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId);
+        }
+    }
+
+    Timer {
+        id: autoRefresh
+        repeat: true
+        interval: parent.refreshInterval
+        running: true
+        onTriggered: {
+            console.log("Triggered");
+            weatherData.reload();
         }
     }
 
