@@ -9,18 +9,20 @@ Item {
     property int minimumWidth: 540
     property alias stationId: info.stationId
     property bool metric: false
-    property int refreshInterval: 300000
+    property int refreshInterval: 5
 
     Component.onCompleted: {
         plasmoid.addEventListener('ConfigChanged', function() {
             stationId = plasmoid.readConfig("stationID");
             metric = plasmoid.readConfig("useMetric");
-            refreshInvertal = plasmoid.readConfig("refreshInterval")*60000;
+            refreshInterval = plasmoid.readConfig("refreshInterval");
         });
     }
 
     onWidthChanged: console.log("New width:",width)
     onHeightChanged: console.log("New height:",height)
+
+    onRefreshIntervalChanged: console.log("New refresh interval:",refreshInterval)
 
     PlasmaCore.Theme{
         id: theme
@@ -84,7 +86,10 @@ Item {
 
         height: updatedText.paintedHeight + 5
         iconSource: "view-refresh"
-        onClicked: weatherData.reload()
+        onClicked: {
+            autoRefresh.restart();
+            weatherData.reload();
+        }
     }
 
     Text {
@@ -121,12 +126,8 @@ Item {
     Timer {
         id: autoRefresh
         repeat: true
-        interval: parent.refreshInterval
-        running: true
-        onTriggered: {
-            console.log("Triggered");
-            weatherData.reload();
-        }
+        interval: parent.refreshInterval*60000
+        running: interval != 240000
     }
 
     XmlListModel {

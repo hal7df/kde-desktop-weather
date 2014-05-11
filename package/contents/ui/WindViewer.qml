@@ -5,7 +5,7 @@ Item {
     id: wind
 
     property alias degrees: windImage.rotation
-    property alias direction: windReadout.text
+    property string direction
     property int speed
     property int gust
     property bool isMetric
@@ -42,8 +42,15 @@ Item {
 
         source: "images/wind-white.png"
 
+        visible: opacity != 0
+        opacity: wind.speed > 0 ? 1 : 0
+
         Behavior on rotation {
             PropertyAnimation {}
+        }
+
+        Behavior on opacity {
+            NumberAnimation {}
         }
     }
 
@@ -52,6 +59,7 @@ Item {
 
         anchors.centerIn: windImage
 
+        text: windImage.visible ? parent.direction : "Calm"
         font.pixelSize: windImage.height/6
         color: theme.textColor
     }
