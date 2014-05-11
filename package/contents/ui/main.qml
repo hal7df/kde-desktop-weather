@@ -5,8 +5,8 @@
 Item {
     id: root
 
-    property int minimumHeight: 400
-    property int minimumWidth: 600
+    property int minimumHeight: 420
+    property int minimumWidth: 540
     property alias stationId: info.stationId
     property bool metric: false
 
@@ -17,8 +17,8 @@ Item {
         });
     }
 
-    height: 600
-    width: 700
+    onWidthChanged: console.log("New width:",width)
+    onHeightChanged: console.log("New height:",height)
 
     PlasmaCore.Theme{
         id: theme
@@ -27,7 +27,7 @@ Item {
     TopPanel {
       id: info
 
-      height: 48
+      height: parent.height*(20/175)
       clip: true
 
 
