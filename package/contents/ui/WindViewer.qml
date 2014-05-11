@@ -85,7 +85,7 @@ Item {
                 bottom: parent.bottom
             }
 
-            width: parent.width/2
+            width: parent.width/3
 
             border.color: theme.textColor
             color: "#00000000"

@@ -75,6 +75,24 @@ Item {
         gust: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windGust : lastGust
     }
 
+    TempViewer {
+        id:  temperature
+
+        anchors {
+            top: info.bottom
+            bottom: refresh.top
+            left: parent.left
+            right: wind.left
+        }
+
+        tempC: weatherData.status == XmlListModel.Ready ? weatherData.get(0).tempC : lastTempC
+        tempF: weatherData.status == XmlListModel.Ready ? weatherData.get(0).tempF : lastTempF
+        dewC: weatherData.status == XmlListModel.Ready ? weatherData.get(0).dewC : lastDewC
+        dewF: weatherData.status == XmlListModel.Ready ? weatherData.get(0).dewF : lastDewF
+        metric: parent.metric
+
+    }
+
     PlasmaComponents.ToolButton {
         id: refresh
 
