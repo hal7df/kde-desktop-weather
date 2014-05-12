@@ -90,7 +90,7 @@ Item {
                 }
             }
 
-            Rectangle {
+            /*Rectangle {
                 id: rainDay
 
                 anchors {
@@ -107,7 +107,7 @@ Item {
                 Behavior on y {
                     PropertyAnimation {}
                 }
-            }
+            }*/
         }
 
         Text {
@@ -124,11 +124,13 @@ Item {
 
             y: (parent.height-rainHr.height)-(0.5*paintedHeight)
 
+            /*
             opacity: Math.abs(dayReadout.y-y) > paintedHeight ? 1 : 0
             visible: opacity != 0 ? true : false
+            */
         }
 
-        Text {
+        /*Text {
             id: dayReadout
 
             anchors {
@@ -156,6 +158,6 @@ Item {
             }
 
             y: rainDay.y-(0.5*paintedHeight)
-        }
+        }*/
     }
 }

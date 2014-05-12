@@ -11,3 +11,4 @@ package/contents/ui/config.ui
 package/contents/ui/WindViewer.qml
 package/contents/ui/TempViewer.qml
 package/contents/ui/PrecipViewer.qml
+package/contents/contrast.js
