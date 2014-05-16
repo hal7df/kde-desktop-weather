@@ -46,7 +46,7 @@ Item {
         opacity: wind.speed > 0 ? 1 : 0
 
         Behavior on rotation {
-            PropertyAnimation {}
+            RotationAnimation { direction: RotationAnimation.Shortest }
         }
 
         Behavior on opacity {
