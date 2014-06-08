@@ -18,25 +18,9 @@ Item {
 
     onHrInChanged: lastHrIn = hrIn
     onHrMmChanged: lastHrMm = hrMm
-    onDayInChanged: {
-        if (dayIn < 0)
-            dayIn = 0;
+    onDayInChanged: lastDayIn = dayIn
 
-        lastDayIn = dayIn;
-    }
-
-    onDayCmChanged: {
-        var numConvert;
-
-        numConvert = parseFloat(dayCm);
-        console.log("Raw cm retrieved: ",numConvert)
-
-        if (numConvert < 0)
-            numConvert = 0;
-
-        _dayCm = numConvert;
-        lastDayCm = _dayCm;
-    }
+    onDayCmChanged: lastDayCm = parseFloat(dayCm)
 
     clip: true
 
@@ -90,7 +74,7 @@ Item {
                 }
             }
 
-            /*Rectangle {
+            Rectangle {
                 id: rainDay
 
                 anchors {
@@ -99,6 +83,7 @@ Item {
                 }
 
                 color: theme.textColor
+                visible: precip.dayIn >= 0
 
                 height: 2
                 y: parent.height - ((precip.dayIn/2)*parent.height)
@@ -107,7 +92,7 @@ Item {
                 Behavior on y {
                     PropertyAnimation {}
                 }
-            }*/
+            }
         }
 
         Text {
@@ -124,13 +109,15 @@ Item {
 
             y: (parent.height-rainHr.height)-(0.5*paintedHeight)
 
-            /*
-            opacity: Math.abs(dayReadout.y-y) > paintedHeight ? 1 : 0
+            opacity: (Math.abs(dayReadout.y-y) > paintedHeight) || !dayReadout.visible ? 1 : 0
             visible: opacity != 0 ? true : false
-            */
+
+            Behavior on opacity {
+                NumberAnimation {}
+            }
         }
 
-        /*Text {
+        Text {
             id: dayReadout
 
             anchors {
@@ -139,6 +126,7 @@ Item {
             }
 
             color: theme.textColor
+            visible: rainDay.visible
 
             text: {
                 if (precip.metric)
@@ -158,6 +146,6 @@ Item {
             }
 
             y: rainDay.y-(0.5*paintedHeight)
-        }*/
+        }
     }
 }

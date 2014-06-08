@@ -103,10 +103,6 @@ Item {
 
             text: temp.metric ? temp.tempC+" °C" : temp.tempF+"°F"
             color: theme.textColor
-
-            Behavior on y {
-                PropertyAnimation{}
-            }
         }
 
         Text {
@@ -125,10 +121,6 @@ Item {
 
             Behavior on opacity {
                 NumberAnimation {}
-            }
-
-            Behavior on y {
-                PropertyAnimation {}
             }
         }
 

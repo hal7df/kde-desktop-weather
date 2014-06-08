@@ -1,5 +1,6 @@
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
+import "../code/contrast.js" as ContrastUtils
 
 Item {
     id: wind
@@ -40,7 +41,7 @@ Item {
         height: width
         fillMode: Image.Stretch
 
-        source: "images/wind-white.png"
+        source: "images/wind-"+ContrastUtils.getContrasting(theme.backgroundColor)+".png"
 
         visible: opacity != 0
         opacity: wind.speed > 0 ? 1 : 0
@@ -138,10 +139,6 @@ Item {
 
             anchors { left: speedGauge.right; leftMargin: 5 }
             y: wind.speed < 20 ? (parent.height-((wind.speed/20)*parent.height))-(paintedHeight/2) : 0
-
-            Behavior on y {
-                PropertyAnimation {}
-            }
         }
 
         Text {
