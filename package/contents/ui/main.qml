@@ -17,6 +17,8 @@ Item {
             metric = plasmoid.readConfig("useMetric");
             refreshInterval = plasmoid.readConfig("refreshInterval");
         });
+
+        plasmoid.aspectRatioMode = plasmoid.IgnoreAspectRatio;
     }
 
     onWidthChanged: console.log("New width:",width)

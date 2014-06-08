@@ -45,10 +45,15 @@ PlasmaCore.FrameSvgItem {
         anchors {
             top: parent.top
             left: conditionsIcon.right
+            right: tempText.left
             bottom: parent.verticalCenter
             margins: 5
             bottomMargin: -3
         }
+
+        width: parent.width - (conditionsIcon.width+tempText.width)
+        scale: (paintedWidth > width) ? (width/paintedWidth) : 1
+        transformOrigin: Item.Left
 
         font.pixelSize: height
         color: theme.textColor
