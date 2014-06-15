@@ -46,14 +46,15 @@ PlasmaCore.FrameSvgItem {
             top: parent.top
             left: conditionsIcon.right
             right: tempText.left
-            bottom: parent.verticalCenter
+            bottom: altitudeText.visible ? parent.verticalCenter : parent.bottom
             margins: 5
-            bottomMargin: -3
+            bottomMargin: altitudeText.visible ? -3 : 5
         }
 
         width: parent.width - (conditionsIcon.width+tempText.width)
         scale: (paintedWidth > width) ? (width/paintedWidth) : 1
         transformOrigin: Item.Left
+        verticalAlignment: Text.AlignVCenter
 
         font.pixelSize: height
         color: theme.textColor
@@ -68,6 +69,10 @@ PlasmaCore.FrameSvgItem {
             bottom: parent.bottom
             margins: 5
         }
+
+        scale: locationText.scale
+        transformOrigin: Item.Left
+        visible: parent.height >= 42
 
         text: parent.stationId+", "+parent.altitude
         font.pixelSize: height

@@ -5,8 +5,8 @@
 Item {
     id: root
 
-    property int minimumHeight: 420
-    property int minimumWidth: 540
+    property int minimumHeight: 330
+    property int minimumWidth: 500
     property alias stationId: info.stationId
     property bool metric: false
     property int refreshInterval: 5
@@ -20,9 +20,6 @@ Item {
 
         plasmoid.aspectRatioMode = plasmoid.IgnoreAspectRatio;
     }
-
-    onWidthChanged: console.log("New width:",width)
-    onHeightChanged: console.log("New height:",height)
 
     onRefreshIntervalChanged: console.log("New refresh interval:",refreshInterval)
 
@@ -161,6 +158,8 @@ Item {
         repeat: true
         interval: parent.refreshInterval*60000
         running: interval != 240000
+
+        onTriggered: weatherData.reload()
     }
 
     XmlListModel {
