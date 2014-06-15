@@ -41,7 +41,7 @@ Item {
         clip: true
 
         color: "#00000000"
-        border.color: theme.textColor
+        border { color: theme.textColor; width: 2 }
 
         Rectangle {
             id: tempLevel

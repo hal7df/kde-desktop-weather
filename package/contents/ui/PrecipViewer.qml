@@ -51,7 +51,7 @@ Item {
             width: precip.width/3
 
             color: "#00000000"
-            border.color: theme.textColor
+            border {  color: theme.textColor; width: 2 }
 
             clip: true
 

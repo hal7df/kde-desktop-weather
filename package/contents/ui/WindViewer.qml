@@ -88,7 +88,7 @@ Item {
 
             width: parent.width/3
 
-            border.color: theme.textColor
+            border { color: theme.textColor; width: 2 }
             color: "#00000000"
 
             clip: true
@@ -138,7 +138,7 @@ Item {
             color: theme.textColor
 
             anchors { left: speedGauge.right; leftMargin: 5 }
-            y: wind.speed < 20 ? (parent.height-((wind.speed/20)*parent.height))-(paintedHeight/2) : 0
+            y: wind.speed < 20 ? (parent.height-windSpeed.height)-(paintedHeight/2) : 0
         }
 
         Text {
