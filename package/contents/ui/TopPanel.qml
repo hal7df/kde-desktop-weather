@@ -48,7 +48,6 @@ PlasmaCore.FrameSvgItem {
             top: parent.top
             bottom: parent.bottom
             left: parent.left
-            margins: 5
         }
         running: parent.busy
         visible: parent.busy
