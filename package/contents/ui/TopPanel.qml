@@ -1,5 +1,6 @@
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 PlasmaCore.FrameSvgItem {
     id: topPanel
@@ -9,6 +10,7 @@ PlasmaCore.FrameSvgItem {
     property string stationId
     property string altitude
     property alias temp: tempText.text
+    property bool busy
 
     property string lastTemp: "°F"
 
@@ -25,6 +27,7 @@ PlasmaCore.FrameSvgItem {
 
     Image {
         id: conditionsIcon
+        visible: !parent.busy
 
         anchors {
             top: parent.top
@@ -37,6 +40,18 @@ PlasmaCore.FrameSvgItem {
         width: height
 
         fillMode: Image.PreserveAspectFit
+    }
+    PlasmaComponents.BusyIndicator {
+        id: busyIcon
+
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: parent.left
+            margins: 5
+        }
+        running: parent.busy
+        visible: parent.busy
     }
 
     Text {

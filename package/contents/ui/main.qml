@@ -32,6 +32,7 @@ Item {
 
       height: parent.height*(20/175)
       clip: true
+      busy: weatherData.status != XmlListModel.Ready
 
 
       temp: {
