@@ -1,6 +1,7 @@
  import QtQuick 1.1
  import org.kde.plasma.components 0.1 as PlasmaComponents
  import org.kde.plasma.core 0.1 as PlasmaCore
+ import "../code/timeUtils.js" as TimeUtils
 
 Item {
     id: root
@@ -132,7 +133,7 @@ Item {
             margins: 5
         }
 
-        text: weatherData.status == XmlListModel.Ready ? weatherData.get(0).time : "Refreshing..."
+        text: weatherData.status == XmlListModel.Ready ? "Last updated "+TimeUtils.getDeltaTime(weatherData.get(0).time)+" minutes ago" : "Refreshing..."
         color: theme.textColor
     }
 
@@ -145,7 +146,7 @@ Item {
             margins: 5
         }
 
-        text: "<a href='http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId+"'>Weather data from Weather Underground</a>"
+        text: "<a href='http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId+"'>Data source: Weather Underground</a>"
 
         color: theme.textColor
 
@@ -171,8 +172,9 @@ Item {
         onStatusChanged: {
             if (status == XmlListModel.Ready)
             {
-                info.location = get(0).location
-                info.altitude = get(0).altitude
+                info.location = get(0).location;
+                info.altitude = get(0).altitude;
+                TimeUtils.convTimeString(get(0).time);
             }
         }
 
