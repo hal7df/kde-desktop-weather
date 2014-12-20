@@ -74,6 +74,7 @@ Item {
         degrees: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windDeg : lastDeg
         speed: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windSpeed : lastSpeed
         gust: weatherData.status == XmlListModel.Ready ? weatherData.get(0).windGust : lastGust
+        updateWarning: parent.stationOwner && updatedText.timeSinceLastUpdate > 30
     }
 
     TempViewer {

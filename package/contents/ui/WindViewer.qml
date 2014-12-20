@@ -10,6 +10,7 @@ Item {
     property real speed
     property real gust
     property bool metric: parent.metric
+    property bool updateWarning
 
     property string lastDir: "North"
     property int lastDeg: 0
@@ -63,6 +64,23 @@ Item {
         text: windImage.visible ? parent.direction : "Calm"
         font.pixelSize: windImage.height/6
         color: theme.textColor
+    }
+
+    Text {
+        id: updateWarning
+
+        anchors {
+            top: windReadout.bottom
+            topMargin: 5
+            horizontalCenter: windReadout.horizontalCenter
+        }
+
+        text: "NO RECENT UPDATE."
+        horizontalAlignment: Text.AlignHCenter
+        font.pixelSize: windReadout.pixelSize/3
+        font.bold: true
+        color: "#ff0000"
+        visible: parent.updateWarning
     }
 
     Item {
