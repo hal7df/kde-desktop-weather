@@ -10,6 +10,7 @@ Item {
     property int minimumWidth: 500
     property alias stationId: info.stationId
     property bool metric: false
+    property bool stationOwner: false
     property int refreshInterval: 5
 
     Component.onCompleted: {
@@ -17,6 +18,7 @@ Item {
             stationId = plasmoid.readConfig("stationID");
             metric = plasmoid.readConfig("useMetric");
             refreshInterval = plasmoid.readConfig("refreshInterval");
+            stationOwner = plasmoid.readConfig("stationOwner");
         });
 
         plasmoid.aspectRatioMode = plasmoid.IgnoreAspectRatio;
@@ -127,14 +129,27 @@ Item {
     Text {
         id: updatedText
 
+        property int timeSinceLastUpdate: weatherData.status == XmlListModel.Ready ? TimeUtils.getDeltaTime(weatherData.get(0).time) : 0
+        property bool error: ((weatherData.status == XmlListModel.Error || weatherData.status == XmlListModel.Null) || timeSinceLastUpdate >= 30)
+
         anchors {
             left: refresh.right
             bottom: parent.bottom
             margins: 5
         }
 
-        text: weatherData.status == XmlListModel.Ready ? "Last updated "+TimeUtils.getDeltaTime(weatherData.get(0).time)+" minutes ago" : "Refreshing..."
-        color: theme.textColor
+        text: {
+            if (weatherData.status == XmlListModel.Ready)
+                return "Last updated "+timeSinceLastUpdate+" minutes ago";
+            else if (weatherData.status == XmlListModel.Loading)
+                return "Refreshing...";
+            else if (weatherData.status == XmlListModel.Error)
+                return "Error refreshing data";
+            else
+                return "Weather data unavailable";
+        }
+        color: error ? "#ff0000" : theme.textColor
+        font.bold: error
     }
 
     Text {
@@ -174,7 +189,6 @@ Item {
             {
                 info.location = get(0).location;
                 info.altitude = get(0).altitude;
-                TimeUtils.convTimeString(get(0).time);
             }
         }
 
@@ -182,7 +196,7 @@ Item {
         XmlRole { name: "location"; query: "location/full/string()" }
         XmlRole { name: "altitude"; query: "location/elevation/string()" }
         XmlRole { name: "stationId"; query: "station_id/string()" }
-        XmlRole { name: "time"; query: "observation_time/string()"; isKey: true }
+        XmlRole { name: "time"; query: "observation_time_rfc822/string()"; isKey: true }
 
         //WEATHER INFO --------------
         //Atmospheric Information

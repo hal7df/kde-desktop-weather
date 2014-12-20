@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>270</width>
-    <height>214</height>
+    <height>251</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>270</width>
-    <height>214</height>
+    <height>251</height>
    </size>
   </property>
   <property name="baseSize">
@@ -108,8 +108,6 @@
      </item>
     </layout>
    </widget>
-   <zorder>verticalLayoutWidget</zorder>
-   <zorder>formLayoutWidget</zorder>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -131,6 +129,19 @@
    </property>
    <property name="openExternalLinks">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="kcfg_stationOwner">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>220</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Station Owner Mode</string>
    </property>
   </widget>
  </widget>
