@@ -1,7 +1,8 @@
- import QtQuick 1.1
- import org.kde.plasma.components 0.1 as PlasmaComponents
- import org.kde.plasma.core 0.1 as PlasmaCore
- import "../code/timeUtils.js" as TimeUtils
+import QtQuick 2.0
+import org.kde.plasma.plasmoid 2.0 as Plasmoid
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
+import "../code/timeUtils.js" as TimeUtils
 
 Item {
     id: root
@@ -130,8 +131,8 @@ Item {
     Text {
         id: updatedText
 
-        property int timeSinceLastUpdate: weatherData.status == XmlListModel.Ready ? TimeUtils.getDeltaTime(weatherData.get(0).time) : 0
-        property bool error: ((weatherData.status == XmlListModel.Error || weatherData.status == XmlListModel.Null) || timeSinceLastUpdate >= 30)
+        property int timeSinceLastUpdate: weatherData.status == XmlListModel.Ready ? TimeUtils.getDeltaTime(weatherData.get(0).time, new Date()) : 0
+        property bool error: ((weatherData.status == XmlListModel.Error || weatherData.status == XmlListModel.Null) || timeSinceLastUpdate >= 1800000)
 
         anchors {
             left: refresh.right
@@ -139,16 +140,6 @@ Item {
             margins: 5
         }
 
-        text: {
-            if (weatherData.status == XmlListModel.Ready)
-                return "Last updated "+timeSinceLastUpdate+" minutes ago";
-            else if (weatherData.status == XmlListModel.Loading)
-                return "Refreshing...";
-            else if (weatherData.status == XmlListModel.Error)
-                return "Error refreshing data";
-            else
-                return "Weather data unavailable";
-        }
         color: error ? "#ff0000" : theme.textColor
         font.bold: error
     }
@@ -219,5 +210,19 @@ Item {
         XmlRole { name: "rainHrMm"; query: "precip_1hr_metric/number()" }
         XmlRole { name: "rainDayIn"; query: "precip_today_in/number()" }
         XmlRole { name: "rainDayCm"; query: "precip_today_metric/string()" }
+    }
+
+    PlasmaCore.DataSource {
+        id: timeSource
+        engine: "time"
+        connectedSources: ["UTC"]
+        interval: 60000
+
+        onNewData: {
+            if (sourceName == "UTC")
+            {
+                updateText.text = TimeUtils.getDeltaTime(weatherData.get(0).time, data.DateTime)
+            }
+        }
     }
 }
