@@ -32,7 +32,5 @@ function getDeltaTime (dTime, curTime)
 {
     var oTime = new Date(dTime);
 
-    console.log("Current time:", curTime, "Update time:", oTime)
-
     return curTime.getTime() - oTime.getTime();
 }
