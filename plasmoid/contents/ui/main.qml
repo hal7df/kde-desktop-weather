@@ -11,20 +11,11 @@ Item {
     property int minimumHeight: 330
     property int minimumWidth: 500
     property alias stationId: info.stationId
-    property bool metric: false
-    property bool stationOwner: false
-    property int refreshInterval: 5
+    property bool metric: plasmoid.configuration.metric
+    property bool stationOwner: plasmoid.configuration.stationOwner
+    property int refreshInterval: plasmoid.configuration.refreshInterval
 
-    Component.onCompleted: {
-        plasmoid.addEventListener('ConfigChanged', function() {
-            stationId = plasmoid.readConfig("stationID");
-            metric = plasmoid.readConfig("useMetric");
-            refreshInterval = plasmoid.readConfig("refreshInterval");
-            stationOwner = plasmoid.readConfig("stationOwner");
-        });
-
-        plasmoid.aspectRatioMode = plasmoid.IgnoreAspectRatio;
-    }
+    Component.onCompleted: plasmoid.aspectRatioMode = plasmoid.IgnoreAspectRatio
 
     onRefreshIntervalChanged: console.log("New refresh interval:",refreshInterval)
 
@@ -34,7 +25,7 @@ Item {
       height: parent.height*(20/175)
       clip: true
       busy: weatherData.status == XmlListModel.Loading
-
+      stationId: plasmoid.configuration.stationID
 
       temp: {
           if (weatherData.status == XmlListModel.Ready)
@@ -122,6 +113,7 @@ Item {
         onClicked: {
             autoRefresh.restart();
             weatherData.reload();
+            updateText.text = TimeUtils.getDeltaTime(weatherData.get(0).time, new Date())
         }
     }
 
@@ -152,7 +144,7 @@ Item {
 
         text: "<a href='http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId+"'>Data source: Weather Underground</a>"
 
-        color: theme.textColor
+        color: theme.linkColor
 
         onLinkActivated: {
             Qt.openUrlExternally("http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId);
@@ -178,6 +170,7 @@ Item {
             {
                 info.location = get(0).location;
                 info.altitude = get(0).altitude;
+                updateText.text = TimeUtils.getDeltaTime(get(0).time, new Date())
             }
         }
 
