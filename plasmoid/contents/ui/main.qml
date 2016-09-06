@@ -113,7 +113,6 @@ Item {
         onClicked: {
             autoRefresh.restart();
             weatherData.reload();
-            updateText.text = TimeUtils.getDeltaTime(weatherData.get(0).time, new Date())
         }
     }
 
@@ -170,7 +169,7 @@ Item {
             {
                 info.location = get(0).location;
                 info.altitude = get(0).altitude;
-                updateText.text = TimeUtils.getDeltaTime(get(0).time, new Date())
+                updatedText.text = TimeUtils.getDeltaTimeString(get(0).time, new Date())
             }
         }
 
@@ -209,10 +208,8 @@ Item {
         interval: 60000
 
         onNewData: {
-            if (sourceName == "UTC")
-            {
-                updateText.text = TimeUtils.getDeltaTime(weatherData.get(0).time, data.DateTime)
-            }
+            if (sourceName == "UTC" && weatherData.status == XmlListModel.Ready)
+                updatedText.text = TimeUtils.getDeltaTimeString(weatherData.get(0).time, data.DateTime)
         }
     }
 }

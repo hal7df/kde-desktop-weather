@@ -30,7 +30,9 @@ function getDeltaTimeString (dTime, curTime)
 
 function getDeltaTime (dTime, curTime)
 {
-    var oTime = Date.fromLocaleString(Qt.locale(), dTime, "ddd, dd MMM YYYY HH:mm:ss t");
+    var oTime = new Date(dTime);
 
-    return curTime.now() - oTime.now();
+    console.log("Current time:", curTime, "Update time:", oTime)
+
+    return curTime.getTime() - oTime.getTime();
 }
