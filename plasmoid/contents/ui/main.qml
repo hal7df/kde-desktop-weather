@@ -137,7 +137,7 @@ Item {
             margins: 5
         }
 
-        color: error ? "#ff0000" : PlasmaCore.Theme.textColor
+        color: error ? "#ff0000" : theme.textColor
         font.bold: error
     }
 
@@ -152,7 +152,7 @@ Item {
 
         text: "<a href='http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId+"'>Data source: Weather Underground</a>"
 
-        color: PlasmaCore.Theme.textColor
+        color: theme.textColor
 
         onLinkActivated: {
             Qt.openUrlExternally("http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId);

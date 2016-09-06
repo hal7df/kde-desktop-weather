@@ -40,7 +40,7 @@ Item {
         height: width
         fillMode: Image.Stretch
 
-        source: "images/wind-"+ContrastUtils.getContrasting(PlasmaCore.Theme.backgroundColor)+".png"
+        source: "images/wind-"+ContrastUtils.getContrasting(theme.backgroundColor)+".png"
 
         visible: opacity != 0
         opacity: wind.speed > 0 ? 1 : 0
@@ -61,7 +61,7 @@ Item {
 
         text: windImage.visible ? parent.direction : "Calm"
         font.pixelSize: windImage.height/6
-        color: PlasmaCore.Theme.textColor
+        color: theme.textColor
     }
 
     Text {
@@ -104,7 +104,7 @@ Item {
 
             width: parent.width/3
 
-            border { color: PlasmaCore.Theme.textColor; width: 2 }
+            border { color: theme.textColor; width: 2 }
             color: "#00000000"
 
             clip: true
@@ -121,7 +121,7 @@ Item {
                 height: (wind.speed/20)*parent.height
                 z: -2
 
-                color: PlasmaCore.Theme.highlightColor
+                color: theme.highlightColor
 
                 Behavior on height {
                     PropertyAnimation {}
@@ -139,7 +139,7 @@ Item {
                 z: -1
                 y: parent.height-((wind.gust/20)*parent.height)
                 height: 2
-                color: PlasmaCore.Theme.textColor
+                color: theme.textColor
 
                 Behavior on y {
                     PropertyAnimation {}
@@ -151,7 +151,7 @@ Item {
             id: speedReadout
 
             text: wind.metric ? "Speed: "+wind.convertMetric(wind.speed)+" km/h" : "Speed: "+wind.speed+" mph"
-            color: PlasmaCore.Theme.textColor
+            color: theme.textColor
 
             anchors { left: speedGauge.right; leftMargin: 5 }
             y: wind.speed < 20 ? (parent.height-windSpeed.height)-(paintedHeight/2) : 0
@@ -161,7 +161,7 @@ Item {
             id: gustReadout
 
             text: wind.metric && wind.gust < 20 ? "Gust: "+wind.convertMetric(wind.gust)+" km/h" : "Gust: "+wind.gust+" mph"
-            color: PlasmaCore.Theme.textColor
+            color: theme.textColor
 
             anchors { left: speedGauge.right; leftMargin: 5 }
             y: wind.gust < 20 ? (parent.height-((wind.gust/20)*parent.height))-(paintedHeight/2) : 0

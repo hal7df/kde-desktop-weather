@@ -49,7 +49,7 @@ Item {
             width: precip.width/3
 
             color: "#00000000"
-            border {  color: PlasmaCore.Theme.textColor; width: 2 }
+            border {  color: theme.textColor; width: 2 }
 
             clip: true
 
@@ -62,7 +62,7 @@ Item {
                     left: parent.left
                 }
 
-                color: PlasmaCore.Theme.highlightColor
+                color: theme.highlightColor
 
                 z: -2
                 height: (precip.hrIn/2)*parent.height
@@ -80,7 +80,7 @@ Item {
                     right: parent.right
                 }
 
-                color: PlasmaCore.Theme.textColor
+                color: theme.textColor
                 visible: precip.dayIn >= 0
 
                 height: 2
@@ -101,7 +101,7 @@ Item {
                 rightMargin: 5
             }
 
-            color: PlasmaCore.Theme.textColor
+            color: theme.textColor
 
             text: precip.metric ? "Hour: "+precip.hrMm+" mm" : "Hour: "+precip.hrIn+" in"
 
@@ -123,7 +123,7 @@ Item {
                 rightMargin: 5
             }
 
-            color: PlasmaCore.Theme.textColor
+            color: theme.textColor
             visible: rainDay.visible
 
             text: {

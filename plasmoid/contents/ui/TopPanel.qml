@@ -67,7 +67,7 @@ PlasmaCore.FrameSvgItem {
         verticalAlignment: Text.AlignVCenter
 
         font.pixelSize: height
-        color: PlasmaCore.Theme.textColor
+        color: theme.textColor
     }
 
     Text {
@@ -86,7 +86,7 @@ PlasmaCore.FrameSvgItem {
 
         text: parent.stationId+", "+parent.altitude
         font.pixelSize: height
-        color: PlasmaCore.Theme.textColor
+        color: theme.textColor
     }
 
     Text {
@@ -101,6 +101,6 @@ PlasmaCore.FrameSvgItem {
 
         verticalAlignment: Text.AlignVCenter
         font.pixelSize: height
-        color: PlasmaCore.Theme.textColor
+        color: theme.textColor
     }
 }

@@ -39,7 +39,7 @@ Item {
         clip: true
 
         color: "#00000000"
-        border { color: PlasmaCore.Theme.textColor; width: 2 }
+        border { color: theme.textColor; width: 2 }
 
         Rectangle {
             id: tempLevel
@@ -51,7 +51,7 @@ Item {
             }
 
             z: -2
-            color: PlasmaCore.Theme.highlightColor
+            color: theme.highlightColor
 
             height: ((temp.tempF+20)/140)*parent.height
 
@@ -73,7 +73,7 @@ Item {
             y: parent.height-(((temp.dewF+20)/140)*parent.height)
             z: -1
 
-            color: PlasmaCore.Theme.textColor
+            color: theme.textColor
 
             Behavior on y {
                 PropertyAnimation {}
@@ -100,7 +100,7 @@ Item {
             y: (parent.height-tempLevel.height)-(0.5*paintedHeight)
 
             text: temp.metric ? temp.tempC+" °C" : temp.tempF+"°F"
-            color: PlasmaCore.Theme.textColor
+            color: theme.textColor
         }
 
         Text {
@@ -112,7 +112,7 @@ Item {
             y: dewLevel.y-(0.5*paintedHeight)
 
             text: temp.metric ? "Dew: "+temp.dewC+" °C" : "Dew: "+temp.dewF+"°F"
-            color: PlasmaCore.Theme.textColor
+            color: theme.textColor
 
             opacity: Math.abs(tempReadout.y-y) > paintedHeight ? 1 : 0
             visible: opacity != 0 ? true : false
