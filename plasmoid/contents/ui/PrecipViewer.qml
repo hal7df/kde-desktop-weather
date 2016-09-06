@@ -1,5 +1,7 @@
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 2.0
+import org.kde.plasma.plasmoid 2.0 as Plasmoid
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     id: precip
@@ -24,10 +26,6 @@ Item {
 
     clip: true
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     Item {
         id: dataContainer
 
@@ -51,7 +49,7 @@ Item {
             width: precip.width/3
 
             color: "#00000000"
-            border {  color: theme.textColor; width: 2 }
+            border {  color: PlasmaCore.Theme.textColor; width: 2 }
 
             clip: true
 
@@ -64,7 +62,7 @@ Item {
                     left: parent.left
                 }
 
-                color: theme.highlightColor
+                color: PlasmaCore.Theme.highlightColor
 
                 z: -2
                 height: (precip.hrIn/2)*parent.height
@@ -82,7 +80,7 @@ Item {
                     right: parent.right
                 }
 
-                color: theme.textColor
+                color: PlasmaCore.Theme.textColor
                 visible: precip.dayIn >= 0
 
                 height: 2
@@ -103,7 +101,7 @@ Item {
                 rightMargin: 5
             }
 
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
 
             text: precip.metric ? "Hour: "+precip.hrMm+" mm" : "Hour: "+precip.hrIn+" in"
 
@@ -125,7 +123,7 @@ Item {
                 rightMargin: 5
             }
 
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
             visible: rainDay.visible
 
             text: {

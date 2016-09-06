@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.XmlListModel 2.0
 import org.kde.plasma.plasmoid 2.0 as Plasmoid
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -26,10 +27,6 @@ Item {
     }
 
     onRefreshIntervalChanged: console.log("New refresh interval:",refreshInterval)
-
-    PlasmaCore.Theme{
-        id: theme
-    }
 
     TopPanel {
       id: info
@@ -140,7 +137,7 @@ Item {
             margins: 5
         }
 
-        color: error ? "#ff0000" : theme.textColor
+        color: error ? "#ff0000" : PlasmaCore.Theme.textColor
         font.bold: error
     }
 
@@ -155,7 +152,7 @@ Item {
 
         text: "<a href='http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId+"'>Data source: Weather Underground</a>"
 
-        color: theme.textColor
+        color: PlasmaCore.Theme.textColor
 
         onLinkActivated: {
             Qt.openUrlExternally("http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId);

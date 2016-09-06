@@ -1,5 +1,7 @@
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 2.0
+import org.kde.plasma.plasmoid 2.0 as Plasmoid
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     id: temp
@@ -22,10 +24,6 @@ Item {
 
     clip: true
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     Rectangle {
         id: thermometer
 
@@ -41,7 +39,7 @@ Item {
         clip: true
 
         color: "#00000000"
-        border { color: theme.textColor; width: 2 }
+        border { color: PlasmaCore.Theme.textColor; width: 2 }
 
         Rectangle {
             id: tempLevel
@@ -53,7 +51,7 @@ Item {
             }
 
             z: -2
-            color: theme.highlightColor
+            color: PlasmaCore.Theme.highlightColor
 
             height: ((temp.tempF+20)/140)*parent.height
 
@@ -75,7 +73,7 @@ Item {
             y: parent.height-(((temp.dewF+20)/140)*parent.height)
             z: -1
 
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
 
             Behavior on y {
                 PropertyAnimation {}
@@ -102,7 +100,7 @@ Item {
             y: (parent.height-tempLevel.height)-(0.5*paintedHeight)
 
             text: temp.metric ? temp.tempC+" °C" : temp.tempF+"°F"
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
         }
 
         Text {
@@ -114,7 +112,7 @@ Item {
             y: dewLevel.y-(0.5*paintedHeight)
 
             text: temp.metric ? "Dew: "+temp.dewC+" °C" : "Dew: "+temp.dewF+"°F"
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
 
             opacity: Math.abs(tempReadout.y-y) > paintedHeight ? 1 : 0
             visible: opacity != 0 ? true : false

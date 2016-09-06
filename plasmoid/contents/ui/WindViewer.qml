@@ -1,5 +1,7 @@
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 2.0
+import org.kde.plasma.plasmoid 2.0 as Plasmoid
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
 import "../code/contrast.js" as ContrastUtils
 
 Item {
@@ -25,10 +27,6 @@ Item {
 
     width: parent.width/3
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     Image {
         id: windImage
 
@@ -42,7 +40,7 @@ Item {
         height: width
         fillMode: Image.Stretch
 
-        source: "images/wind-"+ContrastUtils.getContrasting(theme.backgroundColor)+".png"
+        source: "images/wind-"+ContrastUtils.getContrasting(PlasmaCore.Theme.backgroundColor)+".png"
 
         visible: opacity != 0
         opacity: wind.speed > 0 ? 1 : 0
@@ -63,7 +61,7 @@ Item {
 
         text: windImage.visible ? parent.direction : "Calm"
         font.pixelSize: windImage.height/6
-        color: theme.textColor
+        color: PlasmaCore.Theme.textColor
     }
 
     Text {
@@ -106,7 +104,7 @@ Item {
 
             width: parent.width/3
 
-            border { color: theme.textColor; width: 2 }
+            border { color: PlasmaCore.Theme.textColor; width: 2 }
             color: "#00000000"
 
             clip: true
@@ -123,7 +121,7 @@ Item {
                 height: (wind.speed/20)*parent.height
                 z: -2
 
-                color: theme.highlightColor
+                color: PlasmaCore.Theme.highlightColor
 
                 Behavior on height {
                     PropertyAnimation {}
@@ -141,7 +139,7 @@ Item {
                 z: -1
                 y: parent.height-((wind.gust/20)*parent.height)
                 height: 2
-                color: theme.textColor
+                color: PlasmaCore.Theme.textColor
 
                 Behavior on y {
                     PropertyAnimation {}
@@ -153,7 +151,7 @@ Item {
             id: speedReadout
 
             text: wind.metric ? "Speed: "+wind.convertMetric(wind.speed)+" km/h" : "Speed: "+wind.speed+" mph"
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
 
             anchors { left: speedGauge.right; leftMargin: 5 }
             y: wind.speed < 20 ? (parent.height-windSpeed.height)-(paintedHeight/2) : 0
@@ -163,7 +161,7 @@ Item {
             id: gustReadout
 
             text: wind.metric && wind.gust < 20 ? "Gust: "+wind.convertMetric(wind.gust)+" km/h" : "Gust: "+wind.gust+" mph"
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
 
             anchors { left: speedGauge.right; leftMargin: 5 }
             y: wind.gust < 20 ? (parent.height-((wind.gust/20)*parent.height))-(paintedHeight/2) : 0

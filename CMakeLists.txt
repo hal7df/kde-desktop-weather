@@ -1,14 +1,12 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.12)
 
 project(DesktopWeather)
 
-find_package(Qt4 REQUIRED)
-find_package(KDE4 REQUIRED)
+#find_package(Qt5 REQUIRED)
+find_package(ECM REQUIRED NO_MODULE)
 
-include(KDE4Defaults)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_MODULE_PATH})
 
-install (DIRECTORY package/
-         DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/org.monarq.desktop.weather)
+find_package(KF5Plasma REQUIRED)
 
-install (FILES package/metadata.desktop
-         DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-applet-desktop-weather.desktop)
+plasma_install_package(plasmoid org.monarq.desktop.weather)

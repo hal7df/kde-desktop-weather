@@ -1,7 +1,7 @@
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-
+import QtQuick 2.0
+import org.kde.plasma.plasmoid 2.0 as Plasmoid
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
 PlasmaCore.FrameSvgItem {
     id: topPanel
 
@@ -20,10 +20,6 @@ PlasmaCore.FrameSvgItem {
 
     imagePath: "widgets/frame"
     prefix: "plain"
-
-    PlasmaCore.Theme {
-        id: theme
-    }
 
     Image {
         id: conditionsIcon
@@ -71,7 +67,7 @@ PlasmaCore.FrameSvgItem {
         verticalAlignment: Text.AlignVCenter
 
         font.pixelSize: height
-        color: theme.textColor
+        color: PlasmaCore.Theme.textColor
     }
 
     Text {
@@ -90,7 +86,7 @@ PlasmaCore.FrameSvgItem {
 
         text: parent.stationId+", "+parent.altitude
         font.pixelSize: height
-        color: theme.textColor
+        color: PlasmaCore.Theme.textColor
     }
 
     Text {
@@ -105,6 +101,6 @@ PlasmaCore.FrameSvgItem {
 
         verticalAlignment: Text.AlignVCenter
         font.pixelSize: height
-        color: theme.textColor
+        color: PlasmaCore.Theme.textColor
     }
 }
