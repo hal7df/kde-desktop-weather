@@ -142,12 +142,13 @@ Item {
             margins: 5
         }
 
-        text: "<a href='http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId+"'>Data source: Weather Underground</a>"
+        text: "<a style='color: " + theme.linkColor + ";' href='http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId+"'>Data source: Weather Underground</a>"
+        textFormat: Text.RichText
 
         color: theme.linkColor
 
         onLinkActivated: {
-            Qt.openUrlExternally("http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID="+parent.stationId);
+            Qt.openUrlExternally(link);
         }
     }
 
